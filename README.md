@@ -1,7 +1,7 @@
 <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
 <div align="center">
 
-<img src="assets/banner.svg" alt="CofeLang - Brew and Bytes for Students" width="100%" />
+<img src="banner.svg" alt="CofeLang - Brew and Bytes for Students" width="100%" />
 
 <img src="logo.svg" alt="CofeLang logo" width="110" />
 
