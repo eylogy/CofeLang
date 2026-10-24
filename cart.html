@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart – CofeLang</title>
+    <meta name="description" content="Review the drinks and food in your CofeLang cart, enter your details and place a pickup or dine-in order." />
+    <meta name="author" content="CofeLang Web Development Team" />
+    <meta name="theme-color" content="#3e2723" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CofeLang" />
+    <meta property="og:title" content="Your Cart – CofeLang" />
+    <meta property="og:description" content="Review the drinks and food in your CofeLang cart, enter your details and place a pickup or dine-in order." />
+    <meta property="og:image" content="https://cofelang.vercel.app/assets/og-image.png" />
+    <meta property="og:image:alt" content="CofeLang logo on a coffee-brown background" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/x-icon" href="assets/icon/logo.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <img src="assets/logo.svg" alt="CofeLang logo" width="48" height="48" />
+          <span class="logo-text">
+            <span class="brand-name">CofeLang</span>
+            <span class="brand-tagline">Brew &amp; Bytes for Students</span>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <nav id="site-nav" class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="cart.html" aria-current="page">Cart<span class="cart-badge" data-cart-count hidden>0</span><span class="visually-hidden" data-cart-count-label></span></a></li>
+            <li><a href="orders.html">My Orders</a></li>
+            <li><a href="developers.html">Developers</a></li>
+            <li data-staff-nav hidden><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="login.html">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="hero hero--compact">
+        <h1>Your Cart</h1>
+        <p>Review your selected items and complete your order.</p>
+      </section>
+
+      <section class="section section--narrow" id="cartSection">
+        <h2 class="section-title">Order Summary</h2>
+        <noscript>
+          <p class="notice">The cart needs JavaScript. Please enable it in your browser to place an order.</p>
+        </noscript>
+
+        <div class="empty-state" id="cartEmpty" tabindex="-1" hidden>
+          <p>Your cart is empty.</p>
+          <a href="products.html" class="hero-btn">Browse the menu</a>
+        </div>
+
+        <div id="cartFilled" hidden>
+          <div class="table-wrap">
+            <table class="cart-table" role="table">
+              <caption class="visually-hidden">Items in your cart</caption>
+              <thead>
+                <tr role="row">
+                  <th scope="col" role="columnheader">Item</th>
+                  <th scope="col" role="columnheader">Size</th>
+                  <th scope="col" role="columnheader">Unit price</th>
+                  <th scope="col" role="columnheader">Quantity</th>
+                  <th scope="col" role="columnheader">Line total</th>
+                  <th scope="col" role="columnheader"><span class="visually-hidden">Remove</span></th>
+                </tr>
+              </thead>
+              <tbody id="cartBody" role="rowgroup"></tbody>
+            </table>
+          </div>
+
+          <dl class="cart-totals">
+            <div><dt>Subtotal</dt><dd id="cartSubtotal">₱0.00</dd></div>
+            <div class="cart-totals-discount" id="cartDiscountRow" hidden>
+              <dt>Student discount (20%)</dt>
+              <dd id="cartDiscount">−₱0.00</dd>
+            </div>
+            <div><dt>Tax (12%)</dt><dd id="cartTax">₱0.00</dd></div>
+            <div class="cart-totals-grand"><dt>Total</dt><dd id="cartTotal">₱0.00</dd></div>
+          </dl>
+
+          <div class="cart-actions">
+            <a href="products.html" class="btn-outline">&larr; Continue Shopping</a>
+            <button type="button" class="btn-outline btn-danger" id="clearCart">Clear Cart</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--narrow section--tight" id="checkoutSection" hidden>
+        <div class="form-card">
+          <h2>Your Details</h2>
+          <p class="form-intro">
+            Fields marked <span class="req" aria-hidden="true">*</span> are
+            required. Pay at the counter when you pick up or dine in.
+          </p>
+          <form id="checkoutForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="custName">Full name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="custName" name="name" autocomplete="name" maxlength="60" required aria-describedby="err-custName" />
+                <p class="field-error" id="err-custName" hidden></p>
+              </div>
+              <div class="form-group">
+                <label for="custPhone">Mobile number <span class="req" aria-hidden="true">*</span></label>
+                <input type="tel" id="custPhone" name="phone" autocomplete="tel" placeholder="0917 123 4567" required aria-describedby="hint-custPhone err-custPhone" />
+                <p class="field-hint" id="hint-custPhone">Philippine mobile number, e.g. 0917 123 4567 or +63 917 123 4567.</p>
+                <p class="field-error" id="err-custPhone" hidden></p>
+              </div>
+            </div>
+            <fieldset class="form-group" aria-describedby="err-orderType">
+              <legend>Order type <span class="req" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label><input type="radio" name="orderType" value="Pickup" /> Pickup</label>
+                <label><input type="radio" name="orderType" value="Dine-in" /> Dine-in</label>
+              </div>
+              <p class="field-error" id="err-orderType" hidden></p>
+            </fieldset>
+            <div class="form-group">
+              <label class="check-label" for="custStudent">
+                <input type="checkbox" id="custStudent" name="studentDiscount" aria-describedby="hint-custStudent" />
+                <span>I'm a student: apply the 20% student discount</span>
+              </label>
+              <p class="field-hint" id="hint-custStudent">Please show a valid student ID at the counter. Staff will check it.</p>
+            </div>
+            <div class="form-group">
+              <label for="custCash">Cash you will pay with (₱) <span class="req" aria-hidden="true">*</span></label>
+              <input type="number" id="custCash" name="cash" inputmode="decimal" min="0" step="0.01" placeholder="e.g. 500" required aria-describedby="hint-custCash err-custCash" />
+              <p class="field-hint" id="hint-custCash">
+                Amount due: <strong id="cashDue">₱0.00</strong> &middot;
+                Change: <strong id="cashChange" aria-live="polite">—</strong>
+              </p>
+              <p class="field-error" id="err-custCash" hidden></p>
+            </div>
+            <div class="form-group">
+              <label for="custNotes">Notes (optional)</label>
+              <textarea id="custNotes" name="notes" rows="3" maxlength="200" placeholder="e.g., less sugar, extra ice, no whip" aria-describedby="hint-custNotes err-custNotes"></textarea>
+              <p class="field-hint" id="hint-custNotes">Up to 200 characters.</p>
+              <p class="field-error" id="err-custNotes" hidden></p>
+            </div>
+            <p class="field-error form-error" id="checkoutError" role="alert" tabindex="-1" hidden></p>
+            <button type="submit" class="submit-btn">Place Order</button>
+            <p class="form-legal">
+              By placing an order you agree to our
+              <a href="terms.html">Terms of Service</a> and
+              <a href="privacy.html">Privacy Policy</a>. This is a student demo:
+              no payment is taken online, the cash amount is only used to work
+              out your change, and your order is saved only in this browser.
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h2 class="footer-title">CofeLang</h2>
+          <p>
+            A student-friendly cafe offering quality brews, refreshing drinks,
+            and delicious snacks at affordable prices.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h2 class="footer-title">Quick Links</h2>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+            <li><a href="developers.html">Developers</a></li>
+            <li><a href="login.html">Login</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h2 class="footer-title">Contact Us</h2>
+          <p>Aurora Blvd, beside TIP, Quezon City</p>
+          <p>+63 955 078 6293 </p>
+          <p>Cofelang@gmail.com</p>
+        </div>
+        <div class="footer-col">
+          <h2 class="footer-title">Hours</h2>
+          <p>Mon–Fri 7:00 AM–10:00 PM</p>
+          <p>Sat–Sun 8:00 AM–11:00 PM</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2026 CofeLang. All rights reserved. Designed by the CofeLang
+          Web Development Team.
+        </p>
+        <p class="footer-legal">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
