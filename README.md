@@ -279,6 +279,6 @@ If you like this project, consider giving it a star
 
 <br />
 
-<img src="assets/banner-footer.svg" alt="" width="100%" />
+<img src="banner-footer.svg" alt="" width="100%" />
 
 </div>
